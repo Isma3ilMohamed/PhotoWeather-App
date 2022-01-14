@@ -5,9 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "weather_photos")
-data class WeatherPhotosDb(
+data class WeatherPhotosEntity(
     @PrimaryKey
     val id:Int,
+
+    val name:String,
     @ColumnInfo(name = "photo_path")
     val photoPath:String
 )
