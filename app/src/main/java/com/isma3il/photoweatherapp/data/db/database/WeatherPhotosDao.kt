@@ -1,11 +1,10 @@
-package com.isma3il.photoweatherapp.data.db
+package com.isma3il.photoweatherapp.data.db.database
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 
+@Dao
 interface WeatherPhotosDao {
 
     @Query("SELECT * FROM weather_photos")
@@ -15,5 +14,7 @@ interface WeatherPhotosDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPhoto(weatherPhotosEntity: WeatherPhotosEntity): Completable
 
+    @Delete
+    fun deletePhoto(weatherPhotosEntity: WeatherPhotosEntity):Completable
 
 }

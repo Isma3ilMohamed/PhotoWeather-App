@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.isma3il.photoweatherapp.data.db.AppCacheHelper
 import com.isma3il.photoweatherapp.data.db.CacheHelper
-import com.isma3il.photoweatherapp.data.db.WeatherPhotoDatabase
-import com.isma3il.photoweatherapp.data.db.WeatherPhotosDao
+import com.isma3il.photoweatherapp.data.db.database.WeatherPhotoDatabase
+import com.isma3il.photoweatherapp.data.db.database.WeatherPhotosDao
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -23,13 +23,13 @@ abstract class CacheModule {
     companion object{
 
         @Provides
-        fun provideWeatherDatabase(@ApplicationContext context: Context):WeatherPhotoDatabase{
-            return Room.databaseBuilder(context,WeatherPhotoDatabase::class.java,"weather_photo.db")
+        fun provideWeatherDatabase(@ApplicationContext context: Context): WeatherPhotoDatabase {
+            return Room.databaseBuilder(context, WeatherPhotoDatabase::class.java,"weather_photo.db")
                 .build()
         }
 
         @Provides
-        fun provideWeatherDao(database: WeatherPhotoDatabase):WeatherPhotosDao{
+        fun provideWeatherDao(database: WeatherPhotoDatabase): WeatherPhotosDao {
             return database.weatherPhotosDao()
         }
 

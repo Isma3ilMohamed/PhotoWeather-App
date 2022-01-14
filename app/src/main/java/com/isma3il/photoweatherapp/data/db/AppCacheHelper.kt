@@ -1,5 +1,7 @@
 package com.isma3il.photoweatherapp.data.db
 
+import com.isma3il.photoweatherapp.data.db.database.WeatherPhotosDao
+import com.isma3il.photoweatherapp.data.db.database.WeatherPhotosEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
