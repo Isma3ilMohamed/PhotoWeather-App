@@ -2,10 +2,10 @@ package com.isma3il.photoweatherapp.data.network.model
 
 import com.isma3il.core.model.Mapper
 import com.isma3il.photoweatherapp.BuildConfig
-import com.isma3il.photoweatherapp.domain.model.Weather
+import com.isma3il.photoweatherapp.domain.model.data.Weather
 import javax.inject.Inject
 
-class WeatherMapper @Inject constructor() :Mapper<WeatherInfo,Weather> {
+class WeatherMapper @Inject constructor() :Mapper<WeatherInfo, Weather> {
     override fun map(input: WeatherInfo?): Weather {
         val weather= input?.weather?.get(0)
 

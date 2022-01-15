@@ -1,7 +1,7 @@
 package com.isma3il.photoweatherapp.domain.repositories
 
-import com.isma3il.photoweatherapp.domain.model.Weather
-import com.isma3il.photoweatherapp.domain.model.WeatherPhoto
+import com.isma3il.photoweatherapp.domain.model.data.Weather
+import com.isma3il.photoweatherapp.domain.model.data.WeatherPhoto
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 

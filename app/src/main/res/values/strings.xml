@@ -2,4 +2,6 @@
     <string name="app_name">Photo WeatherApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="images_history">Images History</string>
+    <string name="fab_for_capture_images">fab for capture images</string>
 </resources>

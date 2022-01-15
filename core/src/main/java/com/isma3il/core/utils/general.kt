@@ -40,3 +40,20 @@ fun androidx.constraintlayout.widget.Group.setAllOnClickListener(listener: View.
     }
 }
 
+//view
+
+fun View.secretB() {
+    if (!this.isGoneB()) {
+        this.visibility = View.GONE
+    }
+}
+
+
+fun View.showB() {
+    if (!this.isVisibleB()) {
+        this.visibility = View.VISIBLE
+    }
+}
+fun View.isVisibleB(): Boolean = visibility == View.VISIBLE
+
+fun View.isGoneB(): Boolean = visibility == View.GONE

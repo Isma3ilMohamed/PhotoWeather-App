@@ -1,4 +1,4 @@
-package com.isma3il.photoweatherapp.domain.model
+package com.isma3il.photoweatherapp.domain.model.data
 
 data class Weather(
     val id:Int,

@@ -4,8 +4,8 @@ import com.isma3il.photoweatherapp.data.db.CacheHelper
 import com.isma3il.photoweatherapp.data.db.database.WeatherPhotosEntity
 import com.isma3il.photoweatherapp.data.network.NetworkHelper
 import com.isma3il.photoweatherapp.data.network.model.WeatherMapper
-import com.isma3il.photoweatherapp.domain.model.Weather
-import com.isma3il.photoweatherapp.domain.model.WeatherPhoto
+import com.isma3il.photoweatherapp.domain.model.data.Weather
+import com.isma3il.photoweatherapp.domain.model.data.WeatherPhoto
 import com.isma3il.photoweatherapp.domain.repositories.Repository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
