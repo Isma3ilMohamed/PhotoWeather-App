@@ -98,8 +98,7 @@ dependencies {
     //shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    //screenshot
-    implementation 'com.github.Mika-89:Screenshot:master-SNAPSHOT'
+
 
 
     testImplementation 'junit:junit:4.+'

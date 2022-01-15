@@ -301,6 +301,7 @@
         layout="@layout/fab_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -310,6 +311,6 @@
         android:id="@+id/grp_Info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="imageView2,imageView3,overlay,imageView5,tv_wind_speed,tv_desc,imageView9,tv_city,tv_wind_speed2,iv_temp_icon,tv_sunset,imageView4,imageView6,tv_min_max_temp,imageView11,tv_humidity,tv_humidity2,imageView,imageView12,tv_sunrise,tv_current_temp,tv_date,imageView10,imageView8,imageView7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
