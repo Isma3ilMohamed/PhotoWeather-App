@@ -23,6 +23,7 @@ class WeatherPhotoAdapter : RecyclerView.Adapter<WeatherPhotoAdapter.WeatherPhot
 
 
     fun addData(photos:List<WeatherPhoto>){
+        dataSet.clear()
         dataSet.addAll(photos)
         notifyItemRangeInserted(0,dataSet.size)
     }

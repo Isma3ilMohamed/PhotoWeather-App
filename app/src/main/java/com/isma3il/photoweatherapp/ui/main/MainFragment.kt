@@ -36,6 +36,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
     private var imageUri: Uri? = null
+    private var imagePath=""
 
     private val requestPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -49,8 +50,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
 
             if (isSuccess)
-                parentFragmentManager.addFragment(
-                    WeatherPhotoFragment.newInstance(imageUri),
+                parentFragmentManager.replaceFragment(
+                    WeatherPhotoFragment.newInstance(imageUri,imagePath),
                     R.id.main_container
                 )
 
@@ -116,9 +117,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
     private fun getImageUri(): Uri {
+        val createdFile=requireContext().createImageFile()
+        imagePath=createdFile.second
         return FileProvider.getUriForFile(
             requireContext(),
-            "${BuildConfig.APPLICATION_ID}.provider", requireContext().createImageFile()
+            "${BuildConfig.APPLICATION_ID}.provider", createdFile.first
         )
     }
 

@@ -39,7 +39,6 @@ class MainViewModel @Inject constructor(
       compositeDisposable.add(
           historyPhotosUseCase.execute(null)
               .doOnSubscribe { _loadingLiveData.postValue(true) }
-              .doAfterTerminate { _loadingLiveData.postValue(false) }
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribeBy(
@@ -48,6 +47,7 @@ class MainViewModel @Inject constructor(
                           is Response.Error -> { _errorMessageLiveData.postValue(it.errorMessage)}
                           is Response.Success -> {
                               it.data?.let { _historyLiveData.postValue(it) }
+                              _loadingLiveData.postValue(false)
                           }
                       }
                   },

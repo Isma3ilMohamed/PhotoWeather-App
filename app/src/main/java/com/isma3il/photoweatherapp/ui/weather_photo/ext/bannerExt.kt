@@ -10,7 +10,7 @@ import java.util.*
 
 
 @SuppressLint("SetTextI18n", "SimpleDateFormat")
-fun WeatherPhotoFragment.bindWeather(weather: Weather)= with(binding.layoutWeather){
+fun WeatherPhotoFragment.bindWeather(weather: Weather)= with(binding){
 
     tvCity.text=weather.city
     tvDate.text=SimpleDateFormat("EEE,MMMM dd - H:mm a").format(Date())

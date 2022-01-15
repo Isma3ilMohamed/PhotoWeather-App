@@ -7,8 +7,8 @@ import com.isma3il.photoweatherapp.domain.model.data.WeatherPhoto
 
 @Entity(tableName = "weather_photos")
 data class WeatherPhotosEntity(
-    @PrimaryKey
-    val id:Int,
+    @PrimaryKey(autoGenerate = true)
+    val id:Int=0,
     @ColumnInfo(name = "photo_path")
     val photoPath:String
 ){
@@ -16,7 +16,7 @@ data class WeatherPhotosEntity(
 
     companion object{
         fun fromDomain(photo: WeatherPhoto):WeatherPhotosEntity{
-            return WeatherPhotosEntity(photo.id,photo.photoPath)
+            return WeatherPhotosEntity(photoPath = photo.photoPath)
         }
 
         fun toDomain(photo:WeatherPhotosEntity): WeatherPhoto {

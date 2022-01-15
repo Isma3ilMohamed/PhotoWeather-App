@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.isma3il.core.model.Response
 import com.isma3il.photoweatherapp.domain.model.data.Weather
+import com.isma3il.photoweatherapp.domain.model.data.WeatherPhoto
 import com.isma3il.photoweatherapp.domain.model.input.LocationInput
 import com.isma3il.photoweatherapp.domain.usecases.FetchWeatherInfoUseCase
+import com.isma3il.photoweatherapp.domain.usecases.SaveImageInDbUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherPhotoViewModel @Inject constructor(
     private val compositeDisposable: CompositeDisposable,
-    private val fetchWeatherInfoUseCase: FetchWeatherInfoUseCase
+    private val fetchWeatherInfoUseCase: FetchWeatherInfoUseCase,
+    private val saveImageInDbUseCase: SaveImageInDbUseCase
 ) : ViewModel() {
 
     //progress loading
@@ -45,18 +48,48 @@ class WeatherPhotoViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                             when(it){
-                                 is Response.Error -> { _errorMessageLiveData.postValue(it.errorMessage)}
-                                 is Response.Success ->{
-                                     it.data?.let { _weatherInfoLiveData.postValue(it) }
-                                 }
-                             }
+                        when (it) {
+                            is Response.Error -> {
+                                _errorMessageLiveData.postValue(it.errorMessage)
+                            }
+                            is Response.Success -> {
+                                it.data?.let { _weatherInfoLiveData.postValue(it) }
+                            }
+                        }
                     },
                     onError = {
                         _errorMessageLiveData.postValue(it.localizedMessage ?: "")
                     }
                 )
         )
+    }
+
+    //progress loading
+    private val _savedImageLiveData = MutableLiveData<Boolean>()
+    val savedImageData: LiveData<Boolean>
+        get() = _savedImageLiveData
+
+    fun saveImage( photoPath: String) {
+       compositeDisposable.add(
+           saveImageInDbUseCase.execute(WeatherPhoto(photoPath = photoPath))
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribeBy(
+                   onNext = {
+                       when (it) {
+                           is Response.Error -> {
+                               _errorMessageLiveData.postValue(it.errorMessage)
+                           }
+                           is Response.Success -> {
+                            it.data?.let { _savedImageLiveData.postValue(it) }
+                           }
+                       }
+                   },
+                   onError = {
+                       _errorMessageLiveData.postValue(it.localizedMessage ?: "")
+                   }
+               )
+       )
     }
 
     override fun onCleared() {

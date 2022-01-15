@@ -31,6 +31,6 @@ class AppRepository @Inject constructor(
     }
 
     override fun addPhotoToHistory(weatherPhoto: WeatherPhoto): Completable {
-        return cacheHelper.insertWeatherPhoto(WeatherPhotosEntity.fromDomain(weatherPhoto))
+        return cacheHelper.insertWeatherPhoto(weatherPhoto?.let { WeatherPhotosEntity.fromDomain(it) })
     }
 }
