@@ -5,7 +5,7 @@ import com.isma3il.photoweatherapp.BuildConfig
 import com.isma3il.photoweatherapp.domain.model.data.Weather
 import javax.inject.Inject
 
-class WeatherMapper @Inject constructor() :Mapper<WeatherInfo, Weather> {
+class WeatherMapper @Inject constructor() :Mapper<WeatherInfo, Weather?> {
     override fun map(input: WeatherInfo?): Weather {
         val weather= input?.weather?.get(0)
 
@@ -18,11 +18,12 @@ class WeatherMapper @Inject constructor() :Mapper<WeatherInfo, Weather> {
            currentTemp = input?.main?.temp?:0.0,
            highTemp = input?.main?.temp_max?:0.0,
            lowTemp = input?.main?.temp_min?:0.0,
-           pressure = input?.main?.pressure?:0,
            humidity = input?.main?.humidity?:0,
            windSpeed = input?.wind?.speed?:0.0,
-           sunrise = input?.sys?.sunrise?:0,
-           sunset = input?.sys?.sunset?:0
+           sunrise = input?.sys?.sunrise?.toLong()?:0L,
+           sunset = input?.sys?.sunset?.toLong()?:0L,
+           currentDate = input?.dt?.toLong()?:0L
+
        )
 
     }

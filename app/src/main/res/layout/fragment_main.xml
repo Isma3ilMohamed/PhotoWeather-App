@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/images_history"
-        android:textSize="@dimen/sp_20"
         android:textColor="@color/black"
+        android:textSize="@dimen/sp_32"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +49,8 @@
         android:id="@+id/empty_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/fab_capture"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,12 +66,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_16"
         android:clickable="true"
+        android:contentDescription="@string/fab_for_capture_images"
+        android:focusable="true"
+        android:minHeight="48dp"
         android:src="@drawable/ic_baseline_camera_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:focusable="true"
-        android:contentDescription="@string/fab_for_capture_images" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,9 +9,10 @@ class ApiInterceptor @Inject constructor():Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val original=chain.request()
-        val originalHttpUrl=original.url
-        val url=originalHttpUrl.newBuilder()
+
+        val url=original.url.newBuilder()
             .addQueryParameter(API_KEY,BuildConfig.API_KEY)
+            .addQueryParameter(UNITS,"metric")
             .build()
 
         val requestBuilder=original.newBuilder().url(url)
@@ -20,5 +21,6 @@ class ApiInterceptor @Inject constructor():Interceptor {
 
     companion object{
         private const val API_KEY="appid"
+        private const val UNITS="units"
     }
 }

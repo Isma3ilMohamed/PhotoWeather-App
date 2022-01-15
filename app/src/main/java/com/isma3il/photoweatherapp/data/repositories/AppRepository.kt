@@ -16,7 +16,7 @@ class AppRepository @Inject constructor(
     private val weatherMapper: WeatherMapper,
     private val cacheHelper: CacheHelper
 ) : Repository {
-    override fun fetchWeatherInfo(lat: Double, lng: Double): Observable<Weather> {
+    override fun fetchWeatherInfo(lat: Double, lng: Double): Observable<Weather?> {
         return networkHelper.getWeatherInfo(lat, lng).map {
             weatherMapper.map(it)
         }

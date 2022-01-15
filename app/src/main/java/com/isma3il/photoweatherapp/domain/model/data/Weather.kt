@@ -9,9 +9,9 @@ data class Weather(
     val currentTemp:Double,
     val highTemp:Double,
     val lowTemp:Double,
-    val pressure:Int,
     val humidity:Int,
     val windSpeed:Double,
-    val sunrise:Int,
-    val sunset:Int
+    val sunrise:Long,
+    val sunset:Long,
+    val currentDate:Long
 )

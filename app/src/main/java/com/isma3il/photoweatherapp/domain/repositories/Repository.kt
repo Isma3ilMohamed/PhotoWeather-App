@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Observable
 
 interface Repository {
 
-    fun fetchWeatherInfo(lat:Double,lng:Double):Observable<Weather>
+    fun fetchWeatherInfo(lat:Double,lng:Double):Observable<Weather?>
 
     fun fetchHistoryPhotos():Observable<List<WeatherPhoto>>
 
