@@ -11,15 +11,13 @@ import android.view.PixelCopy
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
-import io.reactivex.rxjava3.annotations.NonNull
-import io.reactivex.rxjava3.core.Observable
+
 import io.reactivex.rxjava3.subjects.PublishSubject
 
 object ScreenShotUtils {
 
-    val screenShotObserver:PublishSubject<Bitmap> = PublishSubject.create()
+    val screenShotSubject:PublishSubject<Bitmap> = PublishSubject.create()
 
 
     fun takeScreenShot(view: View,activity: Activity){
@@ -53,9 +51,9 @@ object ScreenShotUtils {
 
         PixelCopy.request(activity.window, scope, bitmap, { copyResult ->
             if (copyResult == PixelCopy.SUCCESS) {
-               screenShotObserver.onNext(bitmap)
+               screenShotSubject.onNext(bitmap)
             } else {
-                screenShotObserver.onError(Exception("Can't take a screen shot"))
+                screenShotSubject.onError(Exception("Can't take a screen shot"))
             }
             handlerThread.quitSafely()
         }, Handler(handlerThread.looper)
@@ -67,7 +65,7 @@ object ScreenShotUtils {
         val bitmap = Bitmap.createBitmap(view.width,view. height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
-        screenShotObserver.onNext(bitmap)
+        screenShotSubject.onNext(bitmap)
         return bitmap
     }
 
@@ -88,10 +86,7 @@ object ScreenShotUtils {
                 }
             }
 
-        screenShotObserver.onNext(bitmap)
+        screenShotSubject.onNext(bitmap)
     }
 
-    private fun drawTextOnBitmap(){
-
-    }
 }

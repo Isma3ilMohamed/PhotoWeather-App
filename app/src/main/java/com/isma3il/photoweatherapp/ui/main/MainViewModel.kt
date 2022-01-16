@@ -15,10 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val historyPhotosUseCase: FetchHistoryPhotosUseCase,
-    private val compositeDisposable: CompositeDisposable
+    private val historyPhotosUseCase: FetchHistoryPhotosUseCase
 ) : ViewModel() {
-
+    private val compositeDisposable= CompositeDisposable()
     //progress loading
     private val _loadingLiveData = MutableLiveData<Boolean>()
     val loadingLiveData: LiveData<Boolean>
@@ -36,9 +35,9 @@ class MainViewModel @Inject constructor(
         get() = _historyLiveData
 
     fun getHistory() {
+        _loadingLiveData.postValue(true)
       compositeDisposable.add(
           historyPhotosUseCase.execute(null)
-              .doOnSubscribe { _loadingLiveData.postValue(true) }
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribeBy(
@@ -46,8 +45,8 @@ class MainViewModel @Inject constructor(
                       when (it) {
                           is Response.Error -> { _errorMessageLiveData.postValue(it.errorMessage)}
                           is Response.Success -> {
-                              it.data?.let { _historyLiveData.postValue(it) }
                               _loadingLiveData.postValue(false)
+                              it.data?.let { _historyLiveData.postValue(it) }
                           }
                       }
                   },

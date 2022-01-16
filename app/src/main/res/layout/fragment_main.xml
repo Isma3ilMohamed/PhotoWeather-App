@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/images_history"
         android:textColor="@color/black"
-        android:textSize="@dimen/sp_32"
+        android:textSize="@dimen/sp_20"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

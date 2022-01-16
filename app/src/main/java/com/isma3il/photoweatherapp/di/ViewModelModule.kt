@@ -17,11 +17,4 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindWeatherRepository(appRepository: AppRepository):Repository
 
-    companion object{
-
-        @Provides
-        fun provideCompositeDisposable():CompositeDisposable{
-            return CompositeDisposable()
-        }
-    }
 }

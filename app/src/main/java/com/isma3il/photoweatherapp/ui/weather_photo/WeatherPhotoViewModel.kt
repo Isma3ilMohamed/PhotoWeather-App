@@ -18,10 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherPhotoViewModel @Inject constructor(
-    private val compositeDisposable: CompositeDisposable,
     private val fetchWeatherInfoUseCase: FetchWeatherInfoUseCase,
     private val saveImageInDbUseCase: SaveImageInDbUseCase
 ) : ViewModel() {
+
+    private val compositeDisposable= CompositeDisposable()
 
     //progress loading
     private val _loadingLiveData = MutableLiveData<Boolean>()

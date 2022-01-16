@@ -18,7 +18,10 @@ import com.isma3il.core.utils.*
 import com.isma3il.photoweatherapp.BuildConfig
 import com.isma3il.photoweatherapp.R
 import com.isma3il.photoweatherapp.databinding.FragmentMainBinding
+import com.isma3il.photoweatherapp.domain.model.data.WeatherPhoto
+import com.isma3il.photoweatherapp.ui.detail.DetailFragment
 import com.isma3il.photoweatherapp.ui.main.adapter.WeatherPhotoAdapter
+import com.isma3il.photoweatherapp.ui.main.adapter.WeatherPhotoCallback
 import com.isma3il.photoweatherapp.ui.weather_photo.WeatherPhotoFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -32,7 +35,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     private val viewModel by viewModels<MainViewModel>()
 
     private val photoAdapter by lazy {
-        WeatherPhotoAdapter()
+        WeatherPhotoAdapter(object :WeatherPhotoCallback{
+            override fun onPhotoClick(photo: WeatherPhoto) {
+                parentFragmentManager.replaceFragment(
+                    DetailFragment.newInstance(photo.photoPath),
+                    R.id.main_container
+                )
+            }
+        })
     }
 
     private var imageUri: Uri? = null
@@ -40,15 +50,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
     private val requestPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            permissions.entries.forEach {
-                Timber.e("${it.key} = ${it.value}")
+            if (requireContext().hasPermissions(getPermissions())) {
+                takePicture()
             }
 
         }
 
     private val takePictureResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-
             if (isSuccess)
                 parentFragmentManager.replaceFragment(
                     WeatherPhotoFragment.newInstance(imageUri,imagePath),
@@ -70,6 +79,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         //loading
         viewModel.loadingLiveData.observe(this@MainFragment, Observer {
             if (it) progressBar.showB() else progressBar.secretB()
+
         })
 
         //error message
@@ -105,7 +115,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             }
 
         }
-
 
     }
 
