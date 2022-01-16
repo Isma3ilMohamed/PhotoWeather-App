@@ -46,7 +46,7 @@ object ScreenShotUtils {
             yCoordinate + view.height
         )
 
-        val handlerThread = HandlerThread(PixelCopyUtils.PixelCopyListener::class.java.simpleName)
+        val handlerThread = HandlerThread(ScreenShotUtils::class.java.simpleName)
         handlerThread.start()
 
         PixelCopy.request(activity.window, scope, bitmap, { copyResult ->
